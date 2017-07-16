@@ -12,7 +12,7 @@ app = Flask(__name__)
 #Config MySQL
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'avb.tst'
+app.config['MYSQL_PASSWORD'] = 'SECRET_PASS :v'
 app.config['MYSQL_DB'] = 'MyFlaskApp'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
