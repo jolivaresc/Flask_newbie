@@ -6,7 +6,7 @@ from wtforms.validators import InputRequired, Email
 from wtforms.fields.html5 import EmailField
 from passlib.hash import sha256_crypt
 from functools import wraps
-import time
+from Logger import Logger
 
 DEBUG = True
 
@@ -25,11 +25,7 @@ mysql = MySQL(app)
 
 Articles = Articles()
 
-def log(msg):
-    logger = open('logger.dat','a+')
-    logger.write('['+time.strftime("%c")+'] '+ msg +'\n')
-    app.logger.info(msg)
-    logger.close()
+
 
 @app.route('/')
 def index():
@@ -103,8 +99,6 @@ def login():
         # get user by username
         result = cur.execute('SELECT * FROM users WHERE username = %s',[username])
 
-        logger = open('logger.dat','a+')
-
         if result > 0:
             # get stored hash
             data = cur.fetchone()
@@ -112,7 +106,7 @@ def login():
 
             if sha256_crypt.verify(password_candidate,password):
                 #LOGGER
-                log('PASSWORD MATCHED')
+                Logger('PASSWORD MATCHED',app)
                 # starting session
                 session['logged_in'] = True
                 session['username'] = username
@@ -121,7 +115,7 @@ def login():
 
             else:
                 #LOGGER
-                log('PASSWORD NOT MATCHED')
+                Logger('PASSWORD NOT MATCHED',app)
                 # displaying error
                 error = 'Invalid password'
                 return render_template('login.html',error=error)
@@ -129,7 +123,7 @@ def login():
             cur.close()
         else:
             #LOGGER
-            log('NO USER')
+            Logger('NO USER',app)
             # displaying error
             error = 'Username  not found'
             return render_template('login.html',error=error)
