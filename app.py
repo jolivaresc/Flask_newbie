@@ -1,7 +1,9 @@
 from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
 from data import Articles
 from flask_mysqldb import MySQL
-from wtforms import Form, StringField, TextAreaField, PasswordField, validators
+from wtforms import Form, StringField, TextAreaField, PasswordField, validators,BooleanField
+from wtforms.validators import InputRequired, Email
+from wtforms.fields.html5 import EmailField
 from passlib.hash import sha256_crypt
 from functools import wraps
 import time
@@ -48,12 +50,13 @@ def article(id):
 class RegisterForm(Form):
     name = StringField('Name',[validators.Length(min=1,max=50)])
     username = StringField('Username',[validators.Length(min=4,max=25)])
-    email = StringField('email',[validators.Length(min=6,max=50)])
+    email = EmailField('email',[validators.Length(min=6,max=50),validators.Email()])
     password = PasswordField('Password',[
                 validators.DataRequired(),
                 validators.EqualTo('confirm',message='Password do not match.')
             ])
     confirm = PasswordField('Confirm password')
+    accept_tos = BooleanField('I accept the TOS', [validators.DataRequired()])
 
 @app.route('/register', methods =['GET','POST'])
 def register():
@@ -63,6 +66,7 @@ def register():
         email = form.email.data
         username = form.username.data
         password = sha256_crypt.encrypt(str(form.password.data))
+        accept = form.accept_tos.data
 
         #create cursor
         cur = mysql.connection.cursor()
