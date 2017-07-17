@@ -25,7 +25,7 @@ Articles = Articles()
 
 def log(msg):
     logger = open('logger.dat','a+')
-    logger.write(msg+'\n')
+    logger.write('['+time.strftime("%c")+'] '+ msg +'\n')
     app.logger.info(msg)
     logger.close()
 
@@ -89,6 +89,10 @@ def login():
         username = request.form['username']
         password_candidate = request.form['password']
 
+        if username == 'admin':
+            error = 'ERROR: Invalid credentials. Tried login with "admin" user'
+            log(error)
+            return render_template('login.html', error='Invalid credentials')
         # Cursor
         cur = mysql.connection.cursor()
 
@@ -104,18 +108,16 @@ def login():
 
             if sha256_crypt.verify(password_candidate,password):
                 #LOGGER
-                msg = '['+time.strftime("%c")+'] PASSWORD MATCHED'
-                log(msg)
-
+                log('PASSWORD MATCHED')
+                # starting session
                 session['logged_in'] = True
                 session['username'] = username
                 flash('Log in successful','success')
-                return redirect('dashboard')
+                return redirect(url_for('dashboard'))
 
             else:
                 #LOGGER
-                msg = '['+time.strftime("%c")+'] PASSWORD NOT MATCHED'
-                log(msg)
+                log('PASSWORD NOT MATCHED')
                 # displaying error
                 error = 'Invalid password'
                 return render_template('login.html',error=error)
@@ -123,15 +125,32 @@ def login():
             cur.close()
         else:
             #LOGGER
-            msg = '['+time.strftime("%c")+'] NO USER'
-            log(msg)
+            log('NO USER')
             # displaying error
             error = 'Username  not found'
             return render_template('login.html',error=error)
 
     return render_template('login.html')
 
+# Check if user logged in
+def is_logged_in(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('Unauthorized, Please login', 'danger')
+            return redirect(url_for('login'))
+    return wrap
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    flash('Log out','success')
+    return redirect(url_for('login'))
+
 @app.route('/dashboard')
+@is_logged_in
 def dashboard():
     return render_template('dashboard.html')
 
