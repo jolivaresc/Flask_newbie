@@ -4,6 +4,7 @@ from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
+import time
 
 DEBUG = True
 
@@ -21,6 +22,12 @@ mysql = MySQL(app)
 
 
 Articles = Articles()
+
+def log(msg):
+    logger = open('logger.dat','a+')
+    logger.write(msg+'\n')
+    app.logger.info(msg)
+    logger.close()
 
 @app.route('/')
 def index():
@@ -87,13 +94,46 @@ def login():
 
         # get user by username
         result = cur.execute('SELECT * FROM users WHERE username = %s',[username])
+
+        logger = open('logger.dat','a+')
+
         if result > 0:
             # get stored hash
             data = cur.fetchone()
             password = data['password']
 
+            if sha256_crypt.verify(password_candidate,password):
+                #LOGGER
+                msg = '['+time.strftime("%c")+'] PASSWORD MATCHED'
+                log(msg)
+
+                session['logged_in'] = True
+                session['username'] = username
+                flash('Log in successful','success')
+                return redirect('dashboard')
+
+            else:
+                #LOGGER
+                msg = '['+time.strftime("%c")+'] PASSWORD NOT MATCHED'
+                log(msg)
+                # displaying error
+                error = 'Invalid password'
+                return render_template('login.html',error=error)
+            # close connection
+            cur.close()
+        else:
+            #LOGGER
+            msg = '['+time.strftime("%c")+'] NO USER'
+            log(msg)
+            # displaying error
+            error = 'Username  not found'
+            return render_template('login.html',error=error)
 
     return render_template('login.html')
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
 
 if __name__ == '__main__':
     app.debug = DEBUG
