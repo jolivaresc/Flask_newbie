@@ -1,7 +1,9 @@
-[Sun Jul 16 19:44:42 2017]PASSWORD NOT MATCHED
-[Sun Jul 16 19:44:50 2017]NO USER
+[Sun Jul 16 19:44:42 2017] PASSWORD NOT MATCHED
+[Sun Jul 16 19:44:50 2017] NO USER
 [Sun Jul 16 19:45:08 2017] PASSWORD MATCHED
 [Sun Jul 16 19:45:20 2017] ERROR: Invalid credentials. Tried login with "admin" user
 [Mon Jul 17 17:49:37 2017] NO USER
 [Mon Jul 17 17:49:46 2017] PASSWORD MATCHED
 [Mon Jul 17 17:50:08 2017] PASSWORD NOT MATCHED
+[Mon Jul 17 17:52:50 2017] Access to Dashboard denied,  logged_in = None
+[Mon Jul 17 17:53:21 2017] Access to Dashboard denied,  No active session found

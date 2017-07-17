@@ -137,6 +137,7 @@ def is_logged_in(f):
         if 'logged_in' in session:
             return f(*args, **kwargs)
         else:
+            Logger('Access to Dashboard denied,  No active session found',app)
             flash('Unauthorized, Please login', 'danger')
             return redirect(url_for('login'))
     return wrap
