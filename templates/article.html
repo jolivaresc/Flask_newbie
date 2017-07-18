@@ -5,7 +5,7 @@
       <div class="container">
          <div class="col-lg-8">
             <h1>{{article.title}}</h1>
-            <small>Written by {{article.author}} on {{article.create_date}}</small>
+            <small>Written by <i>{{article.author}}</i> on {{article.create_date}}</small>
             <hr>
             {{article.body | safe}}
          </div>

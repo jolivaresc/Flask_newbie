@@ -25,3 +25,15 @@
 [Mon Jul 17 20:24:26 2017] PASSWORD MATCHED
 [Mon Jul 17 20:25:40 2017] PASSWORD MATCHED
 [Mon Jul 17 20:26:28 2017] Article "Text n-1" was Created
+[Tue Jul 18 14:36:35 2017] User (jimenes) registered successfully
+[Tue Jul 18 14:36:47 2017] PASSWORD MATCHED
+[Tue Jul 18 14:37:56 2017] Article "Ajedrez" was Created
+[Tue Jul 18 16:43:40 2017] Article "Carta" was Created
+[Tue Jul 18 16:45:58 2017] Article "Carta" was Created
+[Tue Jul 18 16:54:44 2017] Access to Dashboard denied,  No active session found
+[Tue Jul 18 16:55:00 2017] PASSWORD MATCHED
+[Tue Jul 18 17:24:50 2017] PASSWORD MATCHED
+[Tue Jul 18 17:29:05 2017] Article "Carta" was Created
+[Tue Jul 18 17:32:52 2017] User (Ryo Kawasaki) registered successfully
+[Tue Jul 18 17:32:58 2017] PASSWORD MATCHED
+[Tue Jul 18 17:37:37 2017] Article "<b>Violeta</b>" was Created
