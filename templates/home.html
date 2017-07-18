@@ -1,13 +1,15 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-  <div class="jumbotron text-center">
+  <div class="intro">
     <h1>Welcome To Hades</h1>
     <p class="lead">Flask Tutorial</p>
-    <hr>
+    
     {% if session.logged_in == NULL %}
-      <a href="/register" class="btn btn-primary btn-lg">Register</a>
-      <a href="/login" class="btn btn-success btn-lg">Login</a>
+    <div class="btn-group btn-group-lg">
+      <a href="/register" class="btn btn-primary ">Register</a>
+      <a href="/login" class="btn btn-success">Login</a>
+  	</div>
     {% endif %}
   </div>
 {% endblock %}
