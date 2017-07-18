@@ -2,7 +2,12 @@
 
 {% block body %}
   <div class="jumbotron text-center">
-    <h1>Welcome to Hades</h1>
-    <p class="lead">App build with Flask</p>    
+    <h1>Welcome To Hades</h1>
+    <p class="lead">Flask Tutorial</p>
+    <hr>
+    {% if session.logged_in == NULL %}
+      <a href="/register" class="btn btn-primary btn-lg">Register</a>
+      <a href="/login" class="btn btn-success btn-lg">Login</a>
+    {% endif %}
   </div>
 {% endblock %}

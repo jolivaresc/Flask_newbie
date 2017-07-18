@@ -1,5 +1,5 @@
 from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
-from data import Articles
+#from data import Articles
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators,BooleanField
 from wtforms.validators import InputRequired, Email
@@ -22,10 +22,7 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 #Initialize MYSQL
 mysql = MySQL(app)
 
-
-Articles = Articles()
-
-
+#Articles = Articles()
 
 @app.route('/')
 def index():
@@ -37,11 +34,44 @@ def about():
 
 @app.route('/articles')
 def articles():
+    '''
+    take articles from data.py
     return render_template('articles.html',articles=Articles)
+    '''
+    '''
+    Take articles from DB
+    '''
+    # Create cursor
+    cur = mysql.connection.cursor()
+
+    # Get articles
+    query = "SELECT * FROM articles;"
+    result = cur.execute(query)
+
+    articles = cur.fetchall()
+
+    if result > 0:
+        return render_template('articles.html', articles=articles)
+    else:
+        msg = 'No Articles Found'
+        return render_template('articles.html', msg=msg)
+    # Close connection
+    cur.close()
 
 @app.route('/article/<string:id>/')
 def article(id):
-    return render_template('article.html',id=id)
+    #return render_template('article.html',id=id)
+
+    # Create cursor
+    cur = mysql.connection.cursor()
+
+    # Get article
+    query = "SELECT * FROM articles WHERE id = %s;"
+    result = cur.execute(query, [id])
+
+    article = cur.fetchone()
+
+    return render_template('article.html', article=article)
 
 class RegisterForm(Form):
     name = StringField('Name',[validators.Length(min=1,max=50)])
@@ -68,14 +98,15 @@ def register():
         cur = mysql.connection.cursor()
 
         # Execute query
-        cur.execute("INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)", (name, email, username, password))
+        query = "INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s);"
+        cur.execute(query, (name, email, username, password))
 
        # Commit to DB
         mysql.connection.commit()
 
         # Close connection
         cur.close()
-
+        Logger('User ('+name+') registered successfully',app)
         flash('You are now registered and can log in', 'success')
 
         return redirect(url_for('login'))
@@ -91,13 +122,14 @@ def login():
 
         if username == 'admin':
             error = 'ERROR: Invalid credentials. Tried login with "admin" user'
-            log(error)
+            Logger(error,app)
             return render_template('login.html', error='Invalid credentials')
         # Cursor
         cur = mysql.connection.cursor()
 
         # get user by username
-        result = cur.execute('SELECT * FROM users WHERE username = %s',[username])
+        query = "SELECT * FROM users WHERE username = %s;"
+        result = cur.execute(query,[username])
 
         if result > 0:
             # get stored hash
@@ -143,6 +175,7 @@ def is_logged_in(f):
     return wrap
 
 @app.route('/logout')
+@is_logged_in
 def logout():
     session.clear()
     flash('Log out','success')
@@ -151,7 +184,46 @@ def logout():
 @app.route('/dashboard')
 @is_logged_in
 def dashboard():
-    return render_template('dashboard.html')
+    cur = mysql.connection.cursor()
+
+    # Get articles
+    query = "SELECT * FROM articles;"
+    result = cur.execute(query)
+
+    articles = cur.fetchall()
+
+    if result > 0:
+        return render_template('dashboard.html', articles=articles)
+    else:
+        msg = 'No Articles Found'
+        return render_template('dashboard.html', msg=msg)
+    # Close connection
+    cur.close()
+
+class ArticleForm(Form):
+    title = StringField('Title',[validators.Length(min=1,max=20)])
+    body = TextAreaField('Body',[validators.Length(min=30)])
+
+@app.route('/add_article',methods=['GET','POST'])
+@is_logged_in
+def add_article():
+    form = ArticleForm(request.form)
+    if request.method == 'POST' and form.validate():
+        title = form.title.data
+        body = form.body.data
+        cur = mysql.connection.cursor()
+        query = "INSERT INTO articles(title, body, author) VALUES(%s, %s, %s);"
+        cur.execute(query,(title, body, session['username']))
+
+        # Commit to DB
+        mysql.connection.commit()
+
+        #Close connection
+        cur.close()
+        Logger('Article "'+ title +'" was Created',app)
+        flash('Article Created', 'success')
+        return redirect(url_for('dashboard'))
+    return render_template('add_article.html',form=form)
 
 if __name__ == '__main__':
     app.debug = DEBUG
