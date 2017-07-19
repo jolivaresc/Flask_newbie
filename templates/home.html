@@ -1,17 +1,25 @@
 {% extends 'layout.html' %}
-
 {% block body %}
-  <div >
-    <h1>Welcome To Hades</h1>
-    <p class="lead">Flask Tutorial</p>
-
-    {% if session.logged_in == NULL %}
-    <div class="btn-group">
-      <a href="/register" class="btn btn-default ">Register</a>
-      <a href="/login" class="btn btn-default">Login</a>
-  	</div>
-    {% endif %}
-
+<div >
+  <h1>Welcome To Hades</h1>
+  <p class="lead">Flask Tutorial</p>
+  {% if session.logged_in == NULL %}
+  <div class="btn-group">
+    <a href="/register" class="btn btn-default">Register</a>
+    <a href="/login" class="btn btn-default">Login</a>
+    <a class="btn btn-default btn-del">&times;</a>
+    <button class="btn btn-default" data-toggle="confirmation">Confirmation</button>
+    <a class="btn btn-large btn-primary" data-toggle="confirmation" data-title="Open Google?"
+   href="https://google.com" target="_blank">Confirmation</a>
+   <button class="btn btn-large btn-primary" data-toggle="confirmation"
+        data-btn-ok-label="Continue" data-btn-ok-icon="glyphicon glyphicon-share-alt"
+        data-btn-ok-class="btn-success"
+        data-btn-cancel-label="Stoooop!" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
+        data-btn-cancel-class="btn-danger"
+        data-title="Is it ok?" data-content="This might be dangerous">
+  Confirmation
+</button>
   </div>
-
+  {% endif %}
+</div>
 {% endblock %}

@@ -229,4 +229,5 @@ def add_article():
 if __name__ == '__main__':
     app.debug = DEBUG
     app.secret_key = 'qwerty12345'
-    app.run(host="192.168.10.41",port=1234)
+    #host,pt="192.168.10.41",port=1234
+    app.run("192.168.10.41",port=1234)

@@ -2,16 +2,16 @@
 {% block body %}
 <section class="text-center">
   <br><br><br><br>
-   <div>
-      <div>
-         <div >
-            <h1>{{article.title}}</h1>
-            <hr>
-            {{article.body | safe}}
-            <br><br>
-            <small>Written by <i>{{article.author}}</i> on {{article.create_date}}</small>
-         </div>
+  <div>
+    <div>
+      <div >
+        <h1>{{article.title}}</h1>
+        <hr>
+        {{article.body | safe}}
+        <br><br>
+        <small>Written by <i>{{article.author}}</i> on {{article.create_date}}</small>
       </div>
-   </div>
+    </div>
+  </div>
 </section>
 {% endblock %}
