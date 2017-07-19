@@ -1,9 +1,12 @@
 {% extends 'layout.html' %}
+
 {% block body %}
 <div  align="left">
   <h1>Dashboard</h1>
 
   <a href="/add_article" class="btn btn-default">Add article</a>
+</div>
+{% if articles %}
   <br>
   <table class="table table-condensed active">
     <thead>
@@ -31,5 +34,5 @@
     </tr>
     {% endfor %}
   </table>
-</div>
+  {% endif %}
 {% endblock %}
