@@ -1,35 +1,35 @@
 {% extends 'layout.html' %}
 {% block body %}
-<div class="cointainer" align="left">
-   <h1>Dashboard</h1>
-<a href="/add_article" class="btn btn-default">Add article</a>
-</div>
-<br>
-<table class="table table-condensed active">
-<thead>
+<div  align="left">
+  <h1>Dashboard</h1>
 
-   <tr>
-      <th>ID</th>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Date</th>
-      <th></th>
-      <th></th>
-   </tr>
- </thead>
-   {% for article in articles %}
-   <tr>
+  <a href="/add_article" class="btn btn-default">Add article</a>
+  <br>
+  <table class="table table-condensed active">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Date</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    {% for article in articles %}
+    <tr>
       <td align="left">{{article.id}}</td>
       <td align="left">
-         <a  href="article/{{article.id}}" class="link">
-         {{article.title}}
-         </a>
+        <a  href="article/{{article.id}}" class="link">
+        {{article.title}}
+        </a>
       </td>
       <td align="left">{{article.author}}</td>
       <td align="left">{{article.create_date}}</td>
       <td align="left"><a href="edit_article/{{article.id}}" class="btn btn-success pull-right">Edit</a></td>
       <td align="left"><a href="#" class="btn btn-danger pull-right">Delete</a></td>
-   </tr>
-   {% endfor %}
-</table>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
 {% endblock %}
