@@ -1,14 +1,14 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-  <div class="intro">
+  <div >
     <h1>Welcome To Hades</h1>
     <p class="lead">Flask Tutorial</p>
-    
+
     {% if session.logged_in == NULL %}
-    <div class="btn-group btn-group-lg">
-      <a href="/register" class="btn btn-primary ">Register</a>
-      <a href="/login" class="btn btn-success">Login</a>
+    <div class="btn-group">
+      <a href="/register" class="btn btn-default ">Register</a>
+      <a href="/login" class="btn btn-default">Login</a>
   	</div>
     {% endif %}
   </div>

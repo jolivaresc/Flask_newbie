@@ -1,9 +1,28 @@
 {% extends 'layout.html' %}
 {% block body %}
-<h1>Articles</h1>
-<div class="list-group">
-  {% for article in articles: %}
-    <a href="article/{{article.id}}" class="list-group-item">{{article.title}}</a>
-  {% endfor %}
+<h1 class="text-center">Publicaciones</h1>
+<div>
+  <table class="table table-hover">
+    <thead class="thead-default">
+      <tr>
+        <th class="text-left">
+          Título
+        </th>
+        <th class="text-right">
+          Autor
+        </th>
+      </tr>
+    </thead>
+    {% for article in articles: %}
+    <tr>
+      <th>
+        <a href="article/{{article.id}}" class="text-left">
+          {{article.title}}
+      <td class="text-right">{{article.author}}</td>
+      </a>
+      </th>
+    </tr>
+    {% endfor %}
 </div>
+</table>
 {% endblock %}

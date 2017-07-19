@@ -6,14 +6,17 @@
 </div>
 <br>
 <table class="table table-condensed active">
+<thead>
+
    <tr>
-      <th scope="col">ID</th>
+      <th>ID</th>
       <th>Title</th>
       <th>Author</th>
       <th>Date</th>
       <th></th>
       <th></th>
    </tr>
+ </thead>
    {% for article in articles %}
    <tr>
       <td align="left">{{article.id}}</td>

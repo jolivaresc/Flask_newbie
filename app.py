@@ -10,9 +10,7 @@ from Logger import Logger
 
 DEBUG = True
 
-app = Flask(__name__,
-			static_url_path='',
-			template_folder='templates/'
+app = Flask(__name__
 			)
 
 #Config MySQL
