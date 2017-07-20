@@ -200,8 +200,9 @@ def dashboard():
                        AND a.username=c.author)\
                 ORDER BY c.create_date DESC;'
 
-    result = cur.execute(query_names)
+    result = cur.execute(query_with_names)
     articles = cur.fetchall()
+    print(type(articles))
     if result > 0:
         return render_template('dashboard.html', articles=articles)
     else:
@@ -209,7 +210,7 @@ def dashboard():
         return render_template('dashboard.html', msg=msg)
     # Close connection
     cur.close()
-
+@app.route('/test')
 def test():
     cur = mysql.connection.cursor()
 
