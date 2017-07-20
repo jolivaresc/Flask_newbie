@@ -2,7 +2,7 @@
 {% block body %}
 <h1 class="text-center">Publicaciones</h1>
 <div>
-  <table class="table table-hover">
+  <table class="table table-custom">
     <thead class="thead-default">
       <tr>
         <th class="text-left">
@@ -16,9 +16,10 @@
     {% for article in articles: %}
     <tr>
       <th>
-        <a href="article/{{article.id}}" class="text-left">
+        <a href="/article/{{article.id}}" class="btn btn-default">
           {{article.title}}
-      <td class="text-right">{{article.author}}</td>
+          <td class="text-right">{{article.author}}</td>
+        </a>
       </a>
       </th>
     </tr>
