@@ -188,7 +188,7 @@ def dashboard():
     cur = mysql.connection.cursor()
 
     # Get articles
-    query = "SELECT * FROM articles;"
+    query = "SELECT * FROM articles ORDER BY create_date DESC;"
     result = cur.execute(query)
 
     articles = cur.fetchall()
