@@ -37,8 +37,8 @@
           {% block body %}
           {% endblock %}
           <!-- <a href="#about" class="btn btn-circle page-scroll">
-          <i class="fa fa-angle-double-down animated"></i>
-          </a> -->
+            <i class="fa fa-angle-double-down animated"></i>
+            </a> -->
         </div>
       </div>
     </header>
@@ -49,6 +49,7 @@
     </footer>
     <script type="text/javascript" src="{{ url_for('static',filename='vendor/jquery/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="http://bootstrap-confirmation.js.org/assets/js/docs.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.js') }}"></script>
     <script src="{{ url_for('static',filename='js/grayscale.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-grayscale/3.3.7/js/grayscale.min.js" charset="utf-8"></script>
@@ -59,16 +60,30 @@
     <script src="//cdn.ckeditor.com/4.7.1/full/ckeditor.js"></script>
     <!-- Theme JavaScript -->
     <style>
-  .popover {
-    max-width: inherit;
-    color: black;
-
-  }
-</style>
+      .popover {
+      max-width: inherit;
+      color: black;
+      }
+    </style>
     <script type="text/javascript">
       $('[data-toggle=confirmation]').confirmation();
-      $('[data-toggle=confirmation-singleton]').confirmation({ popout: true});
-      CKEDITOR.replace('editor')
+      // $('[data-toggle=confirmation-custom]').confirmation({
+      // buttons: [
+      //   {
+      //     label: 'Sí',
+      //     class: 'btn btn-xs btn-success',
+      //     icon: 'glyphicon glyphicon-ok',
+      //
+      //   },
+      //   {
+      //     label: 'No',
+      //     class: 'btn btn-xs btn-danger',
+      //     icon: 'glyphicon glyphicon-remove'
+      //   }
+      //   ]
+      // });
+
+      CKEDITOR.replace('editor');
     </script>
   </body>
 </html>

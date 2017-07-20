@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
+from flask import Flask, render_template, flash, redirect, url_for, session, request, logging, jsonify
 #from data import Articles
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators,BooleanField
@@ -188,11 +188,20 @@ def dashboard():
     cur = mysql.connection.cursor()
 
     # Get articles
-    query = "SELECT * FROM articles ORDER BY create_date DESC;"
-    result = cur.execute(query)
+    #query = "SELECT * FROM articles ORDER BY create_date DESC;"
+    query_with_names ='SELECT a.name,\
+                c.*\
+                FROM users a,\
+                     articles c\
+                WHERE a.username=\
+                    (SELECT DISTINCT(b.author)\
+                     FROM articles b\
+                     WHERE a.username=b.author\
+                       AND a.username=c.author)\
+                ORDER BY c.create_date DESC;'
 
+    result = cur.execute(query_names)
     articles = cur.fetchall()
-
     if result > 0:
         return render_template('dashboard.html', articles=articles)
     else:
@@ -201,9 +210,28 @@ def dashboard():
     # Close connection
     cur.close()
 
+def test():
+    cur = mysql.connection.cursor()
+
+    # Get articles
+    query_names ='SELECT a.name,\
+                c.*\
+                FROM users a,\
+                     articles c\
+                WHERE a.username=\
+                    (SELECT DISTINCT(b.author)\
+                     FROM articles b\
+                     WHERE a.username=b.author\
+                       AND a.username=c.author);'
+
+    result = cur.execute(query_names)
+    articles = cur.fetchall()
+    cur.close()
+    return jsonify(articles)
+
 class ArticleForm(Form):
-    title = StringField('Title',[validators.Length(min=1,max=20)])
-    body = TextAreaField('Body',[validators.Length(min=30)])
+    title = StringField('Title',[validators.DataRequired()])
+    body = TextAreaField('Body',[validators.DataRequired()])
 
 @app.route('/add_article',methods=['GET','POST'])
 @is_logged_in
