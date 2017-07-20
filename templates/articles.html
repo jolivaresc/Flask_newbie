@@ -9,7 +9,7 @@
           Título
         </th>
         <th class="text-right">
-          Autor
+          Autor/date
         </th>
       </tr>
     </thead>
@@ -18,7 +18,8 @@
       <th>
         <a href="/article/{{article.id}}" class="btn btn-default">
           {{article.title}}
-          <td class="text-right">{{article.author}}</td>
+          <td class="text-right"><b>{{article.author}}</b>/{{article.create_date.strftime("%c")}}</td>
+
         </a>
       </a>
       </th>
