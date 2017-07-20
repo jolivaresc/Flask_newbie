@@ -22,6 +22,18 @@
   <div class="form-group">
     {{render_field(form.accept_tos)}}
   </div>
-  <p><input class="btn btn-default" type="submit" data-toggle="confirmation" target="_blank" value="Enviar"></p>
+  <p>
+    <button class="btn btn-default" data-toggle="confirmation"
+      data-btn-ok-label="Sí"
+      data-btn-ok-icon="glyphicon glyphicon-ok"
+      data-btn-ok-class="btn-success btn-xs"
+      data-btn-cancel-label="No" data-btn-cancel-icon="glyphicon glyphicon-remove"
+      data-btn-cancel-class="btn-danger btn-xs"
+      data-title="Confirmar registro"
+      >
+      <!-- data-title="Confirmar envío" data-content="This might be dangerous" -->
+      Enviar
+    </button>
+  </p>
 </form>
 {% endblock %}

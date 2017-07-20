@@ -1,17 +1,19 @@
 {% extends 'layout.html' %}
 {% block body %}
-<div align="left">
-  <h1>Añadir entrada</h1>
+
+  <h1 class="text-left">Añadir entrada</h1>
   {% from "includes/_formhelpers.html" import render_field %}
   <form action="" method="POST">
-    <div class="form-group">
+    <div class="form-group text-left">
       {{render_field(form.title, class_="form-control")}}
     </div>
-    <div class="form-group">
+    <div class="form-group text-left">
       {{render_field(form.body, class_="form-control", id="editor")}}
     </div>
+    <div class="text-right">
+
     <p>
-      <button class="btn btn-default" data-toggle="confirmation"
+      <button class="btn btn-default " data-toggle="confirmation"
         data-btn-ok-label="Sí"
         data-btn-ok-icon="glyphicon glyphicon-ok"
         data-btn-ok-class="btn-success btn-xs"
@@ -23,6 +25,7 @@
         Enviar
       </button>
     </p>
+  </div>
   </form>
-</div>
+
 {% endblock %}

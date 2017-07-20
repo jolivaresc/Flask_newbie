@@ -5,6 +5,7 @@
   <table class="table table-custom">
     <thead class="thead-default">
       <tr>
+        <th></th>
         <th class="text-left">
           Título
         </th>
@@ -15,16 +16,23 @@
     </thead>
     {% for article in articles: %}
     <tr>
-      <th>
+      <td>
         <a href="/article/{{article.id}}" class="btn btn-default">
-          {{article.title}}
-          <td class="text-right"><b>{{article.author}}</b>/{{article.create_date.strftime("%c")}}</td>
-
+        VER
         </a>
-      </a>
-      </th>
+      </td>
+      <td>
+        {{article.title}}
+      </td>
+      <td class="text-right"><b>{{article.author}}</b>/{{article.create_date.strftime("%c")}}</td>
     </tr>
     {% endfor %}
 </div>
 </table>
+<div >
+  <hr>
+<a href="#page-top" class="btn btn-circle page-scroll">
+  <i class="fa fa-angle-double-up animated"></i>
+</a>
+</div>
 {% endblock %}

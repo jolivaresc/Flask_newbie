@@ -201,9 +201,9 @@ def dashboard():
                 ORDER BY c.create_date DESC;'
 
     result = cur.execute(query_with_names)
-    articles = cur.fetchall()
-    print(type(articles))
+    #print(type(articles))
     if result > 0:
+        articles = cur.fetchall()
         return render_template('dashboard.html', articles=articles)
     else:
         msg = 'No Articles Found'
@@ -259,4 +259,4 @@ if __name__ == '__main__':
     app.debug = DEBUG
     app.secret_key = 'qwerty12345'
     #host,pt="192.168.10.41",port=1234
-    app.run("192.168.10.41",port=1234)
+    app.run()

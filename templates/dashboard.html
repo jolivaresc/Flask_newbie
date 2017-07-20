@@ -6,6 +6,7 @@
 </div>
 {% if articles %}
 <br>
+<div>
 <table class="table table-condensed active">
   <thead>
     <tr>
@@ -13,7 +14,7 @@
       <th></th>
       <th>Título</th>
       <th>Autor</th>
-      <th>Escrito el</th>
+      <th>Subido el</th>
       <th></th>
       <th></th>
     </tr>
@@ -31,10 +32,18 @@
     </td>
     <td align="left">{{article.name}}</td>
     <td align="left">{{article.create_date.strftime("%c")}}</td>
-    <td align="left"><a href="edit_article/{{article.id}}" class="btn btn-success pull-right">Edit</a></td>
-    <td align="left"><a href="#" class="btn btn-danger pull-right">Delete</a></td>
+    <td align="left"><a href="edit_article/{{article.id}}" class="btn btn-success btn-xs pull-right">Edit</a></td>
+    <td align="left"><a href="#" class="btn btn-danger btn-xs pull-right">Delete</a></td>
   </tr>
   {% endfor %}
 </table>
+</div>
+<hr>
+
+<div >
+<a href="#page-top" class="btn btn-circle page-scroll">
+  <i class="fa fa-angle-double-up animated"></i>
+</a>
+</div>
 {% endif %}
 {% endblock %}
