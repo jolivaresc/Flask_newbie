@@ -32,8 +32,27 @@
     </td>
     <td align="left">{{article.name}}</td>
     <td align="left">{{article.create_date.strftime("%c")}}</td>
-    <td align="left"><a href="edit_article/{{article.id}}" class="btn btn-success btn-xs pull-right">Edit</a></td>
-    <td align="left"><a href="#" class="btn btn-danger btn-xs pull-right">Delete</a></td>
+    <td align="left">
+      <a href="edit_article/{{article.id}}" class="btn btn-success btn-xs pull-right">
+        Modificar
+      </a>
+    </td>
+    <td>
+
+    <form action="{{url_for('delete_article', id=article.id)}}" method="post">
+      <button class="btn btn-danger btn-xs" data-toggle="confirmation"
+        data-btn-ok-label="Sí"
+        data-btn-ok-icon="glyphicon glyphicon-ok"
+        data-btn-ok-class="btn-success btn-xs"
+        data-btn-cancel-label="No" data-btn-cancel-icon="glyphicon glyphicon-remove"
+        data-btn-cancel-class="btn-danger btn-xs"
+        data-title="¿Está seguro de eliminar esta entrada?"
+        >
+        <!-- data-title="Confirmar envío" data-content="This might be dangerous" -->
+        Eliminar
+      </button>
+          </form>
+        </td>
   </tr>
   {% endfor %}
 </table>
