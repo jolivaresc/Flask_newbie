@@ -26,7 +26,7 @@
       </a>
     </td>
     <td align="left">{{article.author}}</td>
-    <td align="left">{{article.create_date}}</td>
+    <td align="left">{{article.create_date.strftime("%c")}}</td>
     <td align="left"><a href="edit_article/{{article.id}}" class="btn btn-success pull-right">Edit</a></td>
     <td align="left"><a href="#" class="btn btn-danger pull-right">Delete</a></td>
   </tr>
