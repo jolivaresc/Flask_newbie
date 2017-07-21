@@ -27,7 +27,7 @@ mysql = MySQL(app)
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+    return render_template('home.html',flag=True)
 
 @app.route('/about')
 def about():
@@ -47,7 +47,17 @@ def articles():
 
     # Get articles
     query = "SELECT * FROM articles ORDER BY create_date DESC;"
-    result = cur.execute(query)
+    query_with_names ='SELECT a.name,\
+                c.*\
+                FROM users a,\
+                     articles c\
+                WHERE a.username=\
+                    (SELECT DISTINCT(b.author)\
+                     FROM articles b\
+                     WHERE a.username=b.author\
+                       AND a.username=c.author)\
+                ORDER BY c.create_date DESC;'
+    result = cur.execute(query_with_names)
 
     articles = cur.fetchall()
 

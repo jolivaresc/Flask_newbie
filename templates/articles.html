@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block body %}
-<h1 class="text-center">Publicaciones</h1>
+<h1 class="text-left">Publicaciones</h1>
 <div>
   <table class="table table-custom">
     <thead class="thead-default">
@@ -9,22 +9,30 @@
         <th class="text-left">
           Título
         </th>
+        <th class="text-left">
+          Autor
+        </th>
         <th class="text-right">
-          Autor/date
+          Fecha
         </th>
       </tr>
     </thead>
     {% for article in articles: %}
     <tr>
       <td>
-        <a href="/article/{{article.id}}" class="btn btn-default">
+        <a href="/article/{{article.id}}" class="btn btn-default btn-xs">
         VER
         </a>
       </td>
-      <td>
+      <td class="text-left">
         {{article.title}}
       </td>
-      <td class="text-right"><b>{{article.author}}</b>/{{article.create_date.strftime("%c")}}</td>
+      <td class="text-left">
+        <b>{{article.name}}</b>
+      </td>
+      <td class="text-right">
+        <b>{{article.create_date.strftime("%c")}}</b>
+      </td>
     </tr>
     {% endfor %}
 </div>
