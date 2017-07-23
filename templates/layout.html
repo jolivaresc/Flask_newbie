@@ -63,17 +63,12 @@
     <!-- CKEDITOR -->
     <script src="//cdn.ckeditor.com/4.7.1/full/ckeditor.js"></script>
     <!-- Theme JavaScript -->
+    <!--
     <style>
-      .popover {
-      max-width: inherit;
-      color: black;
-      }
-      .container {
-      overflow: auto;
-      }
+
     </style>
+     -->
     <script type="text/javascript">
-      $('[data-toggle=confirmation]').confirmation();
       // $('[data-toggle=confirmation-custom]').confirmation({
       // buttons: [
       //   {
@@ -90,6 +85,7 @@
       //   ]
       // });
       CKEDITOR.replace('editor');
+      $('[data-toggle=confirmation]').confirmation();
     </script>
   </body>
 </html>

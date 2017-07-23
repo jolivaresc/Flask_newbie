@@ -1,12 +1,18 @@
 {% extends 'layout.html' %}
 {% block body %}
+<section class="content-section">
 <h1 class="text-left">Publicaciones</h1>
-<div>
-  <table class="table table-custom">
+<div class="inner-addon left-addon">
+    <i class="fa fa-search"></i>
+
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar título..."/>
+</div>
+
+  <table id="table_articles" class="table table-custom">
     <thead class="thead-default">
       <tr>
         <th></th>
-        <th class="text-left">
+        <th class="text-left" >
           Título
         </th>
         <th class="text-left">
@@ -20,8 +26,8 @@
     {% for article in articles: %}
     <tr>
       <td>
-        <a href="/article/{{article.id}}" class="btn btn-default btn-xs">
-        VER
+        <a  href="article/{{article.id}}" class="btn btn-default btn-xs">
+        <i class="fa fa-arrow-right" aria-hidden="true"></i>
         </a>
       </td>
       <td class="text-left">
@@ -39,8 +45,8 @@
 </table>
 <div >
   <hr>
-<a href="#page-top" class="btn btn-circle page-scroll">
+  <a href="#page-top" class="btn btn-circle page-scroll">
   <i class="fa fa-angle-double-up animated"></i>
-</a>
-</div>
+  </a>
+</section>
 {% endblock %}

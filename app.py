@@ -1,17 +1,13 @@
-from flask import Flask, render_template, flash, redirect, url_for, session, request, logging, jsonify
-#from data import Articles
+from flask import Flask, render_template, flash, redirect, url_for, session, request, jsonify
 from flask_mysqldb import MySQL
-from wtforms import Form, StringField, TextAreaField, PasswordField, validators,BooleanField
-from wtforms.validators import InputRequired, Email
-from wtforms.fields.html5 import EmailField
 from passlib.hash import sha256_crypt
 from functools import wraps
 from Logger import Logger
+from forms import ArticleForm, RegisterForm
 
 DEBUG = True
 
-app = Flask(__name__
-			)
+app = Flask(__name__)
 
 #Config MySQL
 app.config['MYSQL_HOST'] = 'localhost'
@@ -83,17 +79,6 @@ def article(id):
     article = cur.fetchone()
 
     return render_template('article.html', article=article)
-
-class RegisterForm(Form):
-    name = StringField('Name',[validators.Length(min=1,max=50)])
-    username = StringField('Username',[validators.Length(min=4,max=25)])
-    email = EmailField('email',[validators.Length(min=6,max=50),validators.Email()])
-    password = PasswordField('Password',[
-                validators.DataRequired(),
-                validators.EqualTo('confirm',message='Password do not match.')
-            ])
-    confirm = PasswordField('Confirm password')
-    accept_tos = BooleanField('I accept the TOS', [validators.DataRequired()])
 
 @app.route('/register', methods =['GET','POST'])
 def register():
@@ -221,6 +206,7 @@ def dashboard():
     # Close connection
     cur.close()
 @app.route('/test')
+@is_logged_in
 def test():
     cur = mysql.connection.cursor()
 
@@ -239,10 +225,6 @@ def test():
     articles = cur.fetchall()
     cur.close()
     return jsonify(articles)
-
-class ArticleForm(Form):
-    title = StringField('Title',[validators.DataRequired()])
-    body = TextAreaField('Body',[validators.DataRequired()])
 
 @app.route('/add_article',methods=['GET','POST'])
 @is_logged_in
@@ -329,4 +311,4 @@ if __name__ == '__main__':
     app.debug = DEBUG
     app.secret_key = 'qwerty12345'
     #host,pt="192.168.10.41",port=1234
-    app.run("192.168.10.39",port=1234)
+    app.run("192.168.10.40",port=1234)

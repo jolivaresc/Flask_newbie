@@ -1,7 +1,9 @@
 {% extends 'layout.html' %}
 {% block body %}
 <br>
-<h1>Register</h1>
+<section>
+
+<h1 class="text-left">Register</h1>
 {% from "includes/_formhelpers.html" import render_field %}
 <form method="POST" action="" align="left">
   <div class="form-group">
@@ -36,4 +38,5 @@
     </button>
   </p>
 </form>
+</div>
 {% endblock %}

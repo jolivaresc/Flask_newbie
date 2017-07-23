@@ -1,69 +1,68 @@
 {% extends 'layout.html' %}
 {% block body %}
-<div  align="left">
-  <h1>Dashboard</h1>
-  <a href="/add_article" class="btn btn-default">Añadir entrada</a>
-</div>
-{% if articles %}
-<br>
-<div>
-<table class="table table-condensed active">
-  <thead>
-    <tr>
-      <th class="hidden">ID</th>
-      <th></th>
-      <th>Título</th>
-      <th>Autor</th>
-      <th>Subido el</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  {% for article in articles %}
-  <tr>
-    <td align="left" class="hidden">{{article.id}}</td>
-    <td>
-        <a  href="article/{{article.id}}" class="btn btn-default btn-xs">
-          VER
-        </a>
-    </td>
-    <td align="left">
-      {{article.title}}
-    </td>
-    <td align="left">{{article.name}}</td>
-    <td align="left">{{article.create_date.strftime("%c")}}</td>
-    <td align="left">
-      <a href="edit_article/{{article.id}}" class="btn btn-success btn-xs pull-right">
-        Modificar
-      </a>
-    </td>
-    <td>
-
-    <form action="{{url_for('delete_article', id=article.id)}}" method="post">
-      <button class="btn btn-danger btn-xs" data-toggle="confirmation"
-        data-btn-ok-label="Sí"
-        data-btn-ok-icon="glyphicon glyphicon-ok"
-        data-btn-ok-class="btn-success btn-xs"
-        data-btn-cancel-label="No" data-btn-cancel-icon="glyphicon glyphicon-remove"
-        data-btn-cancel-class="btn-danger btn-xs"
-        data-title="¿Está seguro de eliminar esta entrada?"
-        >
-        <!-- data-title="Confirmar envío" data-content="This might be dangerous" -->
-        Eliminar
-      </button>
+<div class="content-section">
+  <div  align="left">
+    <h1>Dashboard</h1>
+    <a href="/add_article" class="btn btn-default">Añadir entrada</a>
+  </div>
+  {% if articles %}
+  <br>
+  <div>
+    <table class="table table-condensed active">
+      <thead>
+        <tr>
+          <th class="hidden">ID</th>
+          <th></th>
+          <th>Título</th>
+          <th>Autor</th>
+          <th>Subido el</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      {% for article in articles %}
+      <tr>
+        <td>
+          <a  href="article/{{article.id}}" class="btn btn-default btn-xs">
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </td>
+        <td align="left" class="hidden">{{article.id}}</td>
+        <td align="left">
+          {{article.title}}
+        </td>
+        <td align="left">{{article.name}}</td>
+        <td align="left">{{article.create_date.strftime("%c")}}</td>
+        <td align="left">
+          <a href="edit_article/{{article.id}}" class="btn btn-success btn-xs pull-right">
+          Editar
+          </a>
+        </td>
+        <td>
+          <form action="{{url_for('delete_article', id=article.id)}}" method="post">
+            <button class="btn btn-danger btn-xs" data-toggle="confirmation"
+              data-btn-ok-label="Sí"
+              data-btn-ok-icon="glyphicon glyphicon-ok"
+              data-btn-ok-class="btn-success btn-xs"
+              data-btn-cancel-label="No" data-btn-cancel-icon="glyphicon glyphicon-remove"
+              data-btn-cancel-class="btn-danger btn-xs"
+              data-title="¿Está seguro de eliminar esta entrada?"
+              >
+              <!-- data-title="Confirmar envío" data-content="This might be dangerous" -->
+              Eliminar
+            </button>
           </form>
         </td>
-  </tr>
-  {% endfor %}
-</table>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  <hr>
+  <div >
+    <a href="#page-top" class="btn btn-circle page-scroll">
+    <i class="fa fa-angle-double-up animated"></i>
+    </a>
+  </div>
 </div>
-<hr>
-
-<div >
-<a href="#page-top" class="btn btn-circle page-scroll">
-  <i class="fa fa-angle-double-up animated"></i>
-</a>
-</div>
-
 {% endif %}
 {% endblock %}

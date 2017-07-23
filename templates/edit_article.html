@@ -1,17 +1,15 @@
 {% extends 'layout.html' %}
 {% block body %}
-
-  <h1 class="text-left">Editar entrada</h1>
-  {% from "includes/_formhelpers.html" import render_field %}
-  <form action="" method="POST">
-    <div class="form-group text-left">
-      {{render_field(form.title, class_="form-control")}}
-    </div>
-    <div class="form-group text-left">
-      {{render_field(form.body, class_="form-control", id="editor")}}
-    </div>
-    <div class="text-right">
-
+<h1 class="text-left">Editar entrada</h1>
+{% from "includes/_formhelpers.html" import render_field %}
+<form action="" method="POST">
+  <div class="form-group text-left">
+    {{render_field(form.title, class_="form-control")}}
+  </div>
+  <div class="form-group text-left">
+    {{render_field(form.body, class_="form-control", id="editor")}}
+  </div>
+  <div class="text-right">
     <p>
       <button class="btn btn-default " data-toggle="confirmation"
         data-btn-ok-label="Sí"
@@ -26,6 +24,5 @@
       </button>
     </p>
   </div>
-  </form>
-
+</form>
 {% endblock %}
