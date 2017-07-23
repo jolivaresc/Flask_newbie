@@ -5,16 +5,21 @@
     <h1>Dashboard</h1>
     <a href="/add_article" class="btn btn-default">Añadir entrada</a>
   </div>
+  <hr>
+  <div class="inner-addon left-addon">
+      <i class="fa fa-search"></i>
+      <input type="text" id="myInput" onkeyup="filterTitles()" placeholder="Buscar título..."/>
+  </div>
   {% if articles %}
   <br>
-  <div>
-    <table class="table table-condensed active">
-      <thead>
+
+    <table id="table_articles" class="table table-condensed active display">
+      <thead class="thead-custom">
         <tr>
           <th class="hidden">ID</th>
           <th></th>
-          <th>Título</th>
-          <th>Autor</th>
+          <th onclick="sortTable(0)">Título</th>
+          <th onclick="sortTable(1)">Autor</th>
           <th>Subido el</th>
           <th></th>
           <th></th>
@@ -27,7 +32,7 @@
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
           </a>
         </td>
-        <td align="left" class="hidden">{{article.id}}</td>
+        <!-- <td align="left" class="hidden">{{article.id}}</td> -->
         <td align="left">
           {{article.title}}
         </td>
@@ -56,7 +61,7 @@
       </tr>
       {% endfor %}
     </table>
-  </div>
+
   <hr>
   <div >
     <a href="#page-top" class="btn btn-circle page-scroll">

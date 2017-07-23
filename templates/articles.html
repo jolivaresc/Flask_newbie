@@ -1,20 +1,19 @@
 {% extends 'layout.html' %}
 {% block body %}
-<section class="content-section">
+<div class="content-section">
 <h1 class="text-left">Publicaciones</h1>
 <div class="inner-addon left-addon">
     <i class="fa fa-search"></i>
     <input type="text" id="myInput" onkeyup="filterTitles()" placeholder="Buscar título..."/>
 </div>
-
-  <table id="table_articles" class="table table-custom">
+  <table id="table_articles" class="table table-custom display">
     <thead class="thead-default">
       <tr>
         <th></th>
-        <th class="text-left" >
+        <th onclick="sortTable(0)" class="text-left" >
           Título
         </th>
-        <th class="text-left">
+        <th onclick="sortTable(0)" class="text-left">
           Autor
         </th>
         <th class="text-right">
@@ -47,5 +46,5 @@
   <a href="#page-top" class="btn btn-circle page-scroll">
   <i class="fa fa-angle-double-up animated"></i>
   </a>
-</section>
+</div>
 {% endblock %}

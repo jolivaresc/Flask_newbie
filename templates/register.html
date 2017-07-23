@@ -1,42 +1,67 @@
 {% extends 'layout.html' %}
 {% block body %}
 <br>
-<section>
-
-<h1 class="text-left">Register</h1>
-{% from "includes/_formhelpers.html" import render_field %}
-<form method="POST" action="" align="left">
-  <div class="form-group">
-    {{render_field(form.name, class_="form-control")}}
-  </div>
-  <div class="form-group">
-    {{render_field(form.email, class_="form-control")}}
-  </div>
-  <div class="form-group">
-    {{render_field(form.username, class_="form-control")}}
-  </div>
-  <div class="form-group">
-    {{render_field(form.password, class_="form-control")}}
-  </div>
-  <div class="form-group">
-    {{render_field(form.confirm, class_="form-control")}}
-  </div>
-  <div class="form-group">
-    {{render_field(form.accept_tos)}}
-  </div>
-  <p>
-    <button class="btn btn-default " data-toggle="confirmation"
-      data-btn-ok-label="Sí"
-      data-btn-ok-icon="glyphicon glyphicon-ok"
-      data-btn-ok-class="btn-success btn-xs"
-      data-btn-cancel-label="No" data-btn-cancel-icon="glyphicon glyphicon-remove"
-      data-btn-cancel-class="btn-danger btn-xs"
-      data-title="Confirmar envío"
-      >
+<div>
+  <h1 class="text-left">Register</h1>
+  {% from "includes/_formhelpers.html" import render_field %}
+  <form method="POST" action="" align="left" id="signInForm"
+    onsubmit="return matching()"
+    data-toggle="validator"
+    role="form"
+    data-fv-framework="bootstrap"
+    data-fv-icon-valid="glyphicon glyphicon-ok"
+    data-fv-icon-invalid="glyphicon glyphicon-remove"
+    data-fv-icon-validating="glyphicon glyphicon-refresh">
+    <div class="inner-addon left-addon form-group">
+      <i class="fa fa-user"></i>
+      <input type="text" id="myInput" name="name" placeholder="Nombre"
+        required
+        data-fv-notempty-message="The name is required"
+        title="asdasd">
+    </div>
+    <div class="inner-addon left-addon form-group">
+      <i class="fa fa-envelope"></i>
+      <input type="email" id="myInput" name="email" placeholder="Correo electrónico"
+        required
+        data-fv-notempty-message="The email is required">
+    </div>
+    <div class="inner-addon left-addon form-group">
+      <i class="fa fa-user-circle"></i>
+      <input pattern="[a-zA-Z][a-zA-Z0-9-_.]{1,20}" type="text" id="myInput" name="username" placeholder="Nombre de usuario"
+        required
+        data-fv-notempty-message="The username is required">*<small>No spaces allowed</small>
+    </div>
+    <div id="pass">
+      <div class="inner-addon left-addon form-group">
+        <i class="fa fa-key"></i>
+        <input type="password" id="myInput" name="password" placeholder="Contraseña"
+          required
+          data-fv-notempty-message="The password is required">
+      </div>
+      <div class="inner-addon left-addon form-group">
+        <i class="fa fa-key"></i>
+        <input type="password" id="myInput" name="confirm" placeholder="Repetir contraseña"
+          required
+          data-fv-notempty-message="The confirm is required">
+      </div>
+    </div>
+    <div class="form-group">
+      {{render_field(form.accept_tos)}}
+    </div>
+    <p>
+      <input class="btn btn-default " data-toggle="confirmation"
+        data-btn-ok-label="Sí"
+        data-btn-ok-icon="glyphicon glyphicon-ok"
+        data-btn-ok-class="btn-success btn-xs"
+        data-btn-cancel-label="No" data-btn-cancel-icon="glyphicon glyphicon-remove"
+        data-btn-cancel-class="btn-danger btn-xs"
+        data-title="Confirmar envío"
+        type="submit"
+        value="Enviar"
+        >
       <!-- data-title="Confirmar envío" data-content="This might be dangerous" -->
-      Enviar
-    </button>
-  </p>
-</form>
+
+    </p>
+  </form>
 </div>
 {% endblock %}
